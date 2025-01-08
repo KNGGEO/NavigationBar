@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Bottom Navigation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>   
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            background-color: #ffe;
+        }        
+        .tabs{
+            position: relative;
+            list-style-type: none;
+            display: flex;
+            background-color: #032449;
+            height: 80px;
+            border-radius: 5px;
+            filter: blur(0);
+        }
+        .tabs li a{
+            font-size: 28px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #ffe;
+            width: 110px;
+            height: 100%;
+            display: inline-grid;
+            place-items: center;
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .tabs li a .title {
+            display: none;
+        }
+        .tabs li a:hover{
+            color: #f9fd02;
+        }
+       .tabs li a.active-tab{
+            color: #ff7300;
+            transform: translateY(-35%);
+            font-size: 34px;
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tabs li a.active-tab .title{
+            display: block;
+            font-size: 18px;
+            font-family: serif;
+            color: #a36200;
+            font-weight: 700;
+        }
+        .tabs .tab-indicator{
+            width: 90px;
+            height: 60px;
+            border-radius: 50%;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            background-color: #ffe;
+            position: absolute;
+            top: 0;
+            left: calc(270px - 45px);
+            z-index: -1;
+            transition: left .7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes zoom{
+            0% {
+                width: 0px;
+                height: 0px;
+                opacity: 0.2;
+            }
+            100% {
+                width: 1500px;
+                height: 1500px;
+                opacity: 0;
+            }
+        }
+        footer{
+            width: 100%;
+            background-color: #032449;
+            place-items: center;
+            margin: 5px 0;
+            justify-content: center;
+            align-items: center;
+        }
+        footer p{
+            font-size: small;
+            font-family: cursive;
+            font-weight: 300;
+            color: #ffe;
+            text-transform: capitalize;
+        }
+        footer i{
+            font-size: 16px;
+            padding: 0 5px;
+            color: #ff0281;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="navigations">
+        <ul class="tabs">
+            <span class="tab-indicator"></span>
+            <li>
+                <a href="#">
+                    <i class="fas fa-bars"></i>
+                    <span class="title">Menu</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="title">Notific..</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="tabs-item-active active-tab">
+                    
+                        <i class="fas fa-home"></i>
+                        <span class="title">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <span class="title">Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-user"></i>
+                    <span class="title">Account</span>
+                </a>
+            </li>
+        </ul>
+    <footer>
+        <p>designed by <span><i class="fas fa-heart"></i></span>KNGGEO</p>
+    </footer>
+    </div>
+
+    <script>
+            let tabs = document.querySelector('.tabs')
+
+            tabs.querySelectorAll('li a').forEach((a, i) => {
+            a.onclick = (e) => {
+                if (a.classList.contains('active-tab')) return
+
+                tabs.querySelectorAll('li a').forEach(el => {
+                    el.classList.remove('active-tab')
+                })
+
+                a.classList.add('active-tab')
+
+                let tab_indicator = tabs.querySelector('.tab-indicator')
+
+                tab_indicator.style.left = `calc(${(i * 110) + 60}px - 45px)`
+            }
+        })
+
+    </script>
+    </body>
+</html>
